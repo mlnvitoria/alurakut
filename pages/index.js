@@ -45,6 +45,33 @@ export default function Home() {
 
             <OrkutNostalgicIconSet></OrkutNostalgicIconSet>
           </Box>
+
+          <Box>
+            <h2 className="subTitle">O que você deseja fazer?</h2>
+            <form>
+              <div>
+                <input 
+                  type="text"
+                  name="title" 
+                  placeholder="Qual vai ser o nome da sua comunidade?" 
+                  aria-label="Qual vai ser o nome da sua comunidade?" 
+                />
+              </div>
+              
+              <div>
+                <input 
+                  type="text"
+                  name="image" 
+                  placeholder="Coloque uma URL para usarmos de capa" 
+                  aria-label="Coloque uma URL para usarmos de capa" 
+                />
+              </div>
+
+              <button>
+                Criar comunidade
+              </button>
+            </form>
+          </Box>
         </div>
 
         <div className="peopleArea" style={{ gridArea: "peopleArea" }}>
