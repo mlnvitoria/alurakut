@@ -22,6 +22,10 @@ function ProfileSidebar(properties) {
 export default function Home() {
 
   const githubUser = "vimendes";
+  
+  const communities = [
+    'Alurakut',
+  ];
   const people = [
     'juunegreiros',
     'peas',
@@ -48,7 +52,10 @@ export default function Home() {
 
           <Box>
             <h2 className="subTitle">O que você deseja fazer?</h2>
-            <form>
+            <form onSubmit={function handleCreateCommunity(event) {
+              event.preventDefault();
+              console.log('alo');
+            }}>
               <div>
                 <input 
                   type="text"
@@ -90,7 +97,21 @@ export default function Home() {
               })}
             </ul>
           </ProfileRelationsBoxWrapper>
-          <Box>Comunidades</Box>
+          <ProfileRelationsBoxWrapper>
+            <h2 className="smallTitle">Comunidades ({communities.length})</h2>
+            <ul>
+              {communities.map((currentItem, index) => {
+                return (
+                  <li key={index}>
+                    <a href={`/users/${currentItem}`}>
+                      <img src={`http://placehold.it/300x300`} />
+                      <span>{currentItem}</span>
+                    </a>
+                  </li>
+                )
+              })}
+            </ul>
+          </ProfileRelationsBoxWrapper>
         </div>
       </MainGrid>
     </>
