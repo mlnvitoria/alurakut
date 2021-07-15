@@ -1,10 +1,64 @@
-import styled from 'styled-components'
+import Box from "./src/components/Box";
+import MainGrid from "./src/components/MainGrid";
+import { ProfileRelationsBoxWrapper } from "./src/components/ProfileRelations";
+import { AlurakutMenu, OrkutNostalgicIconSet } from "./src/lib/AlurakutCommons";
 
-const Title = styled.h1`
-  font-size: 50px;
-  color: ${({ theme }) => theme.colors.primary};
-`
+function ProfileSidebar(properties) {
+  return (
+    <Box>
+      <img src={`https://github.com/${properties.githubUser}.png`}  style={{ borderRadius: '8px' }} />
+    </Box>
+  );
+}
 
 export default function Home() {
-  return <Title>My page</Title>
+
+  const githubUser = "vimendes";
+  const people = [
+    'juunegreiros',
+    'peas',
+    'omariosouto',
+    'rafaballerini',
+    'marcobrunodev',
+    'felipefialho',
+  ];
+
+  return (
+    <>
+      <AlurakutMenu githubUser={githubUser} />
+      <MainGrid>
+        <div className="profileArea" style={{ gridArea: "profileArea" }}>
+          <ProfileSidebar githubUser={githubUser} />
+        </div>
+
+        <div className="welcomeArea" style={{ gridArea: "welcomeArea" }}>
+          <Box>
+            <h1 className="title">Bem-vindo(a)!</h1>
+
+            <OrkutNostalgicIconSet></OrkutNostalgicIconSet>
+          </Box>
+        </div>
+        
+        <div className="peopleArea" style={{ gridArea: "peopleArea" }}>
+          <ProfileRelationsBoxWrapper>
+            <h2 className="smallTitle">Pessoas ({people.length})</h2>
+            <ul>
+              {people.map((currentItem, index) => {
+                return (
+                  <li key={index}>
+                    <a href={`/users/${currentItem}`}>
+                      <img src={`https://github.com/${currentItem}.png`} />
+                      <span>{currentItem}</span>
+                    </a>
+                  </li>
+                )
+              })}
+            </ul>
+          </ProfileRelationsBoxWrapper>
+          <Box>Comunidades</Box>
+        </div>
+      </MainGrid>
+    </>
+    
+  )
 }
