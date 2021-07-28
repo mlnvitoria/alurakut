@@ -1,3 +1,4 @@
+import React from 'react';
 import Box from "./src/components/Box";
 import MainGrid from "./src/components/MainGrid";
 import { ProfileRelationsBoxWrapper } from "./src/components/ProfileRelations";
@@ -5,7 +6,7 @@ import { AlurakutMenu, AlurakutProfileSidebarMenuDefault, OrkutNostalgicIconSet 
 
 function ProfileSidebar(properties) {
   return (
-    <Box>
+    <Box as="aside">
       <img src={`https://github.com/${properties.githubUser}.png`}  style={{ borderRadius: '8px' }} />
       <hr />
       <p>
@@ -23,9 +24,14 @@ export default function Home() {
 
   const githubUser = "vimendes";
   
-  const communities = [
-    'Alurakut',
-  ];
+  const [communities, setCommunities] = React.useState(
+    [{ 
+      id: new Date().toISOString(),
+      title: 'Eu odeio acordar cedo',
+      imageUrl: 'https://alurakut.vercel.app/capa-comunidade-01.jpg',
+    }]
+  );
+
   const people = [
     'juunegreiros',
     'peas',
@@ -54,7 +60,16 @@ export default function Home() {
             <h2 className="subTitle">O que você deseja fazer?</h2>
             <form onSubmit={function handleCreateCommunity(event) {
               event.preventDefault();
-              console.log('alo');
+
+              const formData = new FormData(event.target);
+              const newCommunity = {
+                id: new Date().toISOString(),
+                title: formData.get('title'),
+                imageUrl: formData.get('imageUrl'),
+              };
+
+              const updatedCommunities = [...communities, newCommunity];
+              setCommunities(updatedCommunities);
             }}>
               <div>
                 <input 
@@ -68,7 +83,7 @@ export default function Home() {
               <div>
                 <input 
                   type="text"
-                  name="image" 
+                  name="imageUrl" 
                   placeholder="Coloque uma URL para usarmos de capa" 
                   aria-label="Coloque uma URL para usarmos de capa" 
                 />
@@ -100,12 +115,12 @@ export default function Home() {
           <ProfileRelationsBoxWrapper>
             <h2 className="smallTitle">Comunidades ({communities.length})</h2>
             <ul>
-              {communities.map((currentItem, index) => {
+              {communities.map((currentItem) => {
                 return (
-                  <li key={index}>
-                    <a href={`/users/${currentItem}`}>
-                      <img src={`http://placehold.it/300x300`} />
-                      <span>{currentItem}</span>
+                  <li key={currentItem.id}>
+                    <a href={`/communities/${currentItem.title}`}>
+                      <img src={currentItem.imageUrl ?? `http://placehold.it/300x300`} />
+                      <span>{currentItem.title}</span>
                     </a>
                   </li>
                 )
