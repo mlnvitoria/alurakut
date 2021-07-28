@@ -9,7 +9,7 @@ const Box = styled.div`
   margin-bottom: 10px;
   .boxLink {
     font-size: 14px;
-    color: #2E7BB4;
+    color: #E2703A;
     text-decoration: none;
     font-weight: 800;
   }
@@ -54,7 +54,7 @@ const Box = styled.div`
     padding: 8px 12px;
     color: #FFFFFF;
     border-radius: 10000px;
-    background-color: #6F92BB;
+    background-color: #9C3D54;
   }
 `;
 
